@@ -6,7 +6,7 @@ import ListComment from './ListComment'
 const GetPosts = () => {
     const [posts, setPosts] = useState({})
     const fetchPosts = async () => {
-        const { data } = await axios.get("http://localhost:4002/posts")
+        const { data } = await axios.get("http://posts.com/posts")
         console.log(data)
         setPosts(data)
     }

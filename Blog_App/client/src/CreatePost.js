@@ -8,7 +8,7 @@ const CreatePost = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (!title) return;
-        await axios.post("http://localhost:4000/posts", {title}, {
+        await axios.post("http://posts.com/posts/create", {title}, {
             headers : {
                 "Content-Type": "application/json"
             }
