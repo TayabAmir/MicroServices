@@ -38,7 +38,7 @@ using namespace std;
 // 7.4 2 0
 // 8 2 0
 // 3.7 1 0
-// 7.4 2 0
+// 8 2 0
 
 int main(){
     double g = 0, c = 0, in = 0;
