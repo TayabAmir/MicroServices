@@ -1,6 +1,4 @@
-import build from 'next/dist/build'
-import React from 'react'
-
+import buildClient from "../api/build-client"
 const Home = ({ currentUser }) => {
 
     return (
@@ -18,7 +16,7 @@ const Home = ({ currentUser }) => {
 }
 
 Home.getInitialProps = async (context) => {
-    const { data } = buildClient(context).get('/api/users/currentuser')
+    const { data } = await buildClient(context).get('/api/users/currentuser')
     return data
 }
 export default Home 
