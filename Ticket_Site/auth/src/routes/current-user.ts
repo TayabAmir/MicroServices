@@ -1,6 +1,5 @@
 import express, { Request, Response } from "express"
-import { verify } from "jsonwebtoken"
-import { currentUser } from "../middlewares/current-user"
+import { currentUser } from "@ticket-site/common"
 const router = express.Router()
 router.get('/api/users/currentuser', currentUser, (req: Request, res: Response) => {
     res.send({ currentUser: req.currentUser || null })
