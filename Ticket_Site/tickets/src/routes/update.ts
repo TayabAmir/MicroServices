@@ -3,7 +3,7 @@ import { body } from "express-validator"
 import express, { Request, Response } from "express"
 import { Ticket } from "../../model/tickets"
 import { natsWrapper } from "../nats-wrapper"
-import { TicketUpdatedPublisher } from "../events/ticketUpdatedPublisher"
+import { TicketUpdatedPublisher } from "../events/publishers/ticketUpdatedPublisher"
 
 const router = express.Router()
 
