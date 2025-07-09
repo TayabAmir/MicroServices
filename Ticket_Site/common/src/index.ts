@@ -12,6 +12,11 @@ export * from './middlewares/validate-request'
 
 export * from './events/TickerCreatedEvent'
 export * from './events/TickerUpdatedEvent'
+export * from './events/OrderCreatedEvent'
+export * from './events/OrderCancelledEvent'
 export * from './events/listenerClass'
 export * from './events/publisherClass'
 export * from './events/subjects'
+
+export * from './events/types/orderStatus'
+

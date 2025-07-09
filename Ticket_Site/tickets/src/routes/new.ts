@@ -1,7 +1,7 @@
 import { requireAuth, validateRequest } from "@ticket-site/common"
 import { body } from "express-validator"
 import express, { Request, Response } from "express"
-import { Ticket } from "../../model/tickets"
+import { Ticket } from "../model/tickets"
 import { TicketCreatedPublisher } from "../events/publishers/ticketCreatedPublisher"
 import { natsWrapper } from "../nats-wrapper"
 
@@ -21,7 +21,8 @@ router.post('/api/tickets', requireAuth, [
         id: ticket.id,
         title: ticket.title,
         price: ticket.price,
-        userId: ticket.userId
+        userId: ticket.userId,
+        version: ticket.version
     })
     res.status(201).send(ticket)
 })

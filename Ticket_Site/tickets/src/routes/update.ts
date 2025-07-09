@@ -1,7 +1,7 @@
-import { NotAuthorizedError, NotFoundError, requireAuth, validateRequest } from "@ticket-site/common"
+import { BadRequestError, NotAuthorizedError, NotFoundError, requireAuth, validateRequest } from "@ticket-site/common"
 import { body } from "express-validator"
 import express, { Request, Response } from "express"
-import { Ticket } from "../../model/tickets"
+import { Ticket } from "../model/tickets"
 import { natsWrapper } from "../nats-wrapper"
 import { TicketUpdatedPublisher } from "../events/publishers/ticketUpdatedPublisher"
 
@@ -16,6 +16,9 @@ router.put('/api/tickets/:id', requireAuth, [
     if (!ticket) {
         throw new NotFoundError();
     }
+    if(ticket.orderId){
+        throw new BadRequestError("Ticket you are trying to update is reserved");
+    }
     const userId = req.currentUser!.id
     if (userId !== ticket.userId) {
         throw new NotAuthorizedError();
@@ -27,8 +30,9 @@ router.put('/api/tickets/:id', requireAuth, [
         title: ticket.title,
         price: ticket.price,
         userId: ticket.userId,
+        version: ticket.version
     })
-    
+
     res.status(200).send(ticket)
 
 })
