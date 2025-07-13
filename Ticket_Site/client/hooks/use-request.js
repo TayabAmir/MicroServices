@@ -5,10 +5,12 @@ import { toast } from "react-toastify";
 const useRequest = ({ url, method, body, onSuccess }) => {
     const [errors, setErrors] = useState(null)
 
-    const doRequest = async () => {
+    const doRequest = async (props = {}) => {
         try {
             setErrors(null)
-            const res = await axios[method](url, body);
+            const res = await axios[method](url, {
+                ...props, ...body
+            });
             if(onSuccess)
                 onSuccess(res.data)
             return res.data

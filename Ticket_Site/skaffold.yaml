@@ -42,3 +42,19 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
+    - image: tayyab448/expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: tayyab448/payment
+      context: payments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .

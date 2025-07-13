@@ -1,10 +1,8 @@
 import mongoose from 'mongoose';
 import { app } from './app';
 import { natsWrapper } from './nats-wrapper';
-import { TicketCreatedListener } from './events/listeners/TicketCreatedListener';
-import { TicketUpdatedListener } from './events/listeners/TicketUpdatedListener';
-import { ExpirationCompletedListener } from './events/listeners/ExpirationCompletedListener';
-import { PaymentCreatedListener } from './events/listeners/PaymentCreatedListener';
+import { OrderCancelledListener } from './events/listeners/orderCancelledListener';
+import { OrderCreatedListener } from './events/listeners/orderCreatedListener';
 
 if (process.platform === 'win32') {
     const readline = require('readline').createInterface({
@@ -44,11 +42,9 @@ const start = async () => {
 
         process.on("SIGINT", () => natsWrapper.client.close());
         process.on("SIGTERM", () => natsWrapper.client.close());
-
-        new TicketCreatedListener(natsWrapper.client).listen();
-        new TicketUpdatedListener(natsWrapper.client).listen();
-        new ExpirationCompletedListener(natsWrapper.client).listen();
-        new PaymentCreatedListener(natsWrapper.client).listen();
+        
+        new OrderCancelledListener(natsWrapper.client).listen();
+        new OrderCreatedListener(natsWrapper.client).listen();
 
         await mongoose.connect(process.env.MONGO_URI!);
         console.log("Connected to MongoDB");
